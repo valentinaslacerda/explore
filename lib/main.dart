@@ -1,7 +1,6 @@
-import 'package:explore/view/pages/home.dart';
 import 'package:explore/view/pages/login.dart';
 import 'package:explore/view/pages/register.dart';
-import 'package:explore/view/pages/viewHome.dart';
+import 'package:explore/view/pages/view_home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
