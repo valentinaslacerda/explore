@@ -16,22 +16,33 @@ class ViewHome extends StatelessWidget {
       text: 'Register',
     )
   ];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: listTabs.length,
-        child: Scaffold(
-          appBar: AppBar(
-            leading: SizedBox(),
-            backgroundColor: gray,
-            elevation: 5,
-            bottom: TabBar(
-              tabs: listTabs,
-              indicatorColor: Colors.grey,
-              indicatorWeight: 3,
+      length: listTabs.length,
+      child: Scaffold(
+        backgroundColor: gray,
+        body: Stack(
+          children: [
+            TabBarView(
+              children: [Home(), Register()],
             ),
-          ),
-          body: TabBarView(children: [Home(), Register()]),
-        ));
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 80,
+                color: gray,
+                child: TabBar(
+                  tabs: listTabs,
+                  indicatorColor: Colors.grey,
+                  indicatorWeight: 3,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
