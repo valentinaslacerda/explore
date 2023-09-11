@@ -27,11 +27,11 @@ class Home extends StatelessWidget {
                   image: AssetImage('assets/images/home.jpg'),
                   fit: BoxFit.cover),
             ),
-            height: 350,
+            height: 400,
             width: double.infinity,
           ),
           SizedBox(
-            height: 35,
+            height: 45,
           ),
           CardLugar()
         ],

@@ -13,13 +13,13 @@ class CardLugar extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           color: Color(0xffFFFFFF),
         ),
-        height: 191,
-        width: 139,
+        height: 214,
+        width: 162,
         child: Column(
           children: [
             Container(
-              height: 155,
-              width: 139,
+              height: 171,
+              width: 162,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
