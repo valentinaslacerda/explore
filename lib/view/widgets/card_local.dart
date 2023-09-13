@@ -1,9 +1,10 @@
-import 'package:explore/view/colors.dart';
+import 'package:explore/models/lugar.dart';
 import 'package:flutter/material.dart';
 
 class CardLugar extends StatelessWidget {
-  const CardLugar({super.key});
-
+  CardLugar({super.key, required this.place});
+  
+  final Place place;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -11,7 +12,7 @@ class CardLugar extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Color(0xffFFFFFF),
+          color: const Color(0xffFFFFFF),
         ),
         height: 214,
         width: 162,
@@ -20,7 +21,7 @@ class CardLugar extends StatelessWidget {
             Container(
               height: 171,
               width: 162,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
@@ -31,13 +32,13 @@ class CardLugar extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 7),
+            const SizedBox(height: 7),
             Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 7),
                   child: Text(
-                    "Floresta",
+                    '${place.name}',
                     style: TextStyle(
                         fontSize: 18,
                         color: Color(0xff222222),

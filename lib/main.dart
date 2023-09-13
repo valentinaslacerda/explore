@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => Login(),
         '/register': (context) => Register(),
       },
-      initialRoute: '/home',
+      initialRoute: '/login',
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),

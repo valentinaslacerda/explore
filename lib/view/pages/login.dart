@@ -2,13 +2,14 @@ import 'package:explore/controllers/controller_login.dart';
 import 'package:explore/view/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:validatorless/validatorless.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
 
   final _formKey = GlobalKey<FormState>();
-
+  
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ControllerLogin>(
@@ -193,4 +194,5 @@ class Login extends StatelessWidget {
       }
     );
   }
+
 }

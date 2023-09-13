@@ -17,14 +17,15 @@ class Localization {
 class Place {
   String? name;
   String? description;
-  Localization? locale;
-  File? image;
-  Float? rating;
+  // Localization? locale;
+  // File? image;
+  // Float? rating;
 
   Place(
       {@required this.name,
       @required this.description,
-      @required this.locale,
-      @required this.image,
-      @required this.rating});
+      // @required this.locale,
+      // @required this.image,
+      // @required this.rating
+      });
 }
