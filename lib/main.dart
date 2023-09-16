@@ -1,4 +1,4 @@
-import 'package:explore/providers/places.dart';
+import 'package:explore/providers/my_places.dart';
 import 'package:explore/view/pages/login.dart';
 import 'package:explore/view/pages/register.dart';
 import 'package:explore/view/pages/view_home.dart';

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:explore/providers/places.dart';
+import 'package:explore/providers/my_places.dart';
 import 'package:explore/view/colors.dart';
 import 'package:explore/view/widgets/image_input.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +18,13 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 
-  //VARIÁVEIS
+  
   final TextEditingController controllerName = TextEditingController();
   final TextEditingController controllerDesc = TextEditingController();
   File? pickedImage;
 
 
-  //MÉTODOS
+  
   void selectImage(File image){
     pickedImage = image;
   }
@@ -35,7 +35,7 @@ class _RegisterState extends State<Register> {
     Provider.of<MyPlaces>(context, listen: false).addPlace(
       controllerName.text, controllerDesc.text, pickedImage!
     );
-    //Navigator.pushNamed(context, '/home');
+    Navigator.pushNamed(context, '/home');
   }
 
   
@@ -155,6 +155,8 @@ class _RegisterState extends State<Register> {
                       TextButton(
                         onPressed: () {
                           addLugar();
+                          controllerDesc.text = '';
+                          controllerName.text = '';
 
                         },
                         style: TextButton.styleFrom(
@@ -168,13 +170,14 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                       )
-                    ]),
+                    ]
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
-      );
-      }
+      ),
+    );
+  }
 }

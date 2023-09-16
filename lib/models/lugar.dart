@@ -14,18 +14,21 @@ class Localization {
 }
 
 class Place {
+  String? id;
   String? name;
   String? description;
-  // Localization? locale;
   File? image;
+  Localization? locale;
   // Float? rating;
 
   Place(
-      {@required this.name,
-      @required this.description,
-      // @required this.locale,
-      @required this.image,
-      // @required this.rating
+      {
+        @required this.id,
+        @required this.name,
+        @required this.description,
+        @required this.locale,
+        @required this.image,
+        // @required this.rating
       });
 
   Place.fromJson(Map<String, dynamic> json)
