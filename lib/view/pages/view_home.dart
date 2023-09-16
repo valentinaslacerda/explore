@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 class ViewHome extends StatelessWidget {
   ViewHome({super.key});
 
-  List<Widget> listTabs = [
-    Tab(
+  final List<Widget> listTabs = [
+    const Tab(
       icon: Icon(Icons.home),
       text: 'Home',
     ),
-    Tab(
+    const Tab(
       icon: Icon(Icons.pin_drop),
       text: 'Register',
     )

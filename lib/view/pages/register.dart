@@ -1,16 +1,47 @@
-import 'package:explore/controllers/controller_register.dart';
-import 'package:explore/view/colors.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'dart:io';
 
-class Register extends StatelessWidget {
-  const Register({super.key});
+import 'package:explore/providers/places.dart';
+import 'package:explore/view/colors.dart';
+import 'package:explore/view/widgets/image_input.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:validatorless/validatorless.dart';
+
+
+class Register extends StatefulWidget {
+  Register({super.key});
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+
+  //VARIÁVEIS
+  final TextEditingController controllerName = TextEditingController();
+  final TextEditingController controllerDesc = TextEditingController();
+  File? pickedImage;
+
+
+  //MÉTODOS
+  void selectImage(File image){
+    pickedImage = image;
+  }
+  void addLugar(){
+    if(controllerName.text.isEmpty || pickedImage == null){
+      return;
+    }
+    Provider.of<MyPlaces>(context, listen: false).addPlace(
+      controllerName.text, controllerDesc.text, pickedImage!
+    );
+    //Navigator.pushNamed(context, '/home');
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ControllerRegister>(
-      init: ControllerRegister(),
-      builder: (r) {
         return Scaffold(
         backgroundColor: const Color(0xffe4e4e4),
         body: SafeArea(
@@ -29,7 +60,8 @@ class Register extends StatelessWidget {
                       borderRadius: BorderRadius.circular(7),
                     ),
                     padding: const EdgeInsets.all(24),
-                    child: Column(children: [
+                    child: Column(
+                      children: [
                       const SizedBox(height: 10),
                       const Align(
                         alignment: Alignment.topLeft,
@@ -44,9 +76,12 @@ class Register extends StatelessWidget {
                       TextFormField(
                         cursorColor: green,
                         decoration: const InputDecoration(
-                            prefixIconColor: green,
-                            border: OutlineInputBorder(),
-                            hintText: "Digite o local em que você está"),
+                          prefixIconColor: green,
+                          border: OutlineInputBorder(),
+                          hintText: "Digite o nome do local"
+                        ),
+                        controller: controllerName,
+                        validator: Validatorless.required("O nome é obrigatório"),
                       ),
                       const SizedBox(height: 30),
                       const Align(
@@ -60,8 +95,7 @@ class Register extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       TextFormField(
-                        textAlign: TextAlign
-                            .left, // Define o alinhamento horizontal para a esquerda
+                        textAlign: TextAlign.left, 
                         textAlignVertical: TextAlignVertical.top,
                         cursorColor: green,
                         maxLines: 5,
@@ -73,55 +107,60 @@ class Register extends StatelessWidget {
                           ),
                           
                         ),
+                        controller: controllerDesc,
+                        validator: Validatorless.required("A descrição é obrigatória"),
                       ),
                       const SizedBox(height: 30),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 57.0,
-                            height: 57.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: green,
-                            ),
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.pin_drop,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 40),
-                          Container(
-                            width: 57.0,
-                            height: 57.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: green,
-                            ),
-                            child: IconButton(
-                              onPressed: () {
-                                r.tirarFoto();
-                              },
-                              icon: Icon(
-                                Icons.camera_alt,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      ImageInput(onSelectImage: selectImage,),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   mainAxisSize: MainAxisSize.min,
+                      //   children: [
+                      //     Container(
+                      //       width: 57.0,
+                      //       height: 57.0,
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(5),
+                      //         color: green,
+                      //       ),
+                      //       child: IconButton(
+                      //         onPressed: () {},
+                      //         icon: const Icon(
+                      //           Icons.pin_drop,
+                      //           color: Color(0xffffffff),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: 40),
+                      //     Container(
+                      //       width: 57.0,
+                      //       height: 57.0,
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(5),
+                      //         color: green,
+                      //       ),
+                      //       child: IconButton(
+                      //         onPressed: () {
+                      //           //r.tirarFoto();
+                      //         },
+                      //         icon: const Icon(
+                      //           Icons.camera_alt,
+                      //           color: Color(0xffffffff),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
                       const SizedBox(height: 40),
                       TextButton(
                         onPressed: () {
+                          addLugar();
 
                         },
                         style: TextButton.styleFrom(
-                            backgroundColor: green,
-                            minimumSize: const Size(double.infinity, 50)),
+                          backgroundColor: green,
+                          minimumSize: const Size(double.infinity, 50)
+                        ),
                         child: const Text(
                           'Cadastrar',
                           style: TextStyle(
@@ -137,8 +176,5 @@ class Register extends StatelessWidget {
           ),
         ),
       );
-      },
-  
-    );
-  }
+      }
 }

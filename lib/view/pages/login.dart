@@ -1,20 +1,17 @@
-import 'package:explore/controllers/controller_login.dart';
 import 'package:explore/view/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:validatorless/validatorless.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
 
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController controllerEmail = TextEditingController();
+  final TextEditingController controllerPassword = TextEditingController();
   
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ControllerLogin>(
-      init: ControllerLogin(),
-      builder: (c) {
+    
         return Scaffold(
           body: SafeArea(
           child: Form(
@@ -68,7 +65,7 @@ class Login extends StatelessWidget {
                             
                             hintText: "Digite seu email"
                           ),
-                          controller: c.textEditingControllerEmail,
+                          controller: controllerEmail,
                           validator: Validatorless.multiple([
                             Validatorless.required("Email é obrigatório"),
                             Validatorless.email("Digite um email válido")
@@ -89,7 +86,7 @@ class Login extends StatelessWidget {
                             hintText: "Digite sua senha"
                           ),
                           keyboardType: TextInputType.emailAddress,
-                          controller: c.textEditingControllerPassword,
+                          controller: controllerPassword,
                           obscureText: true,
                           validator: Validatorless.multiple([
                             Validatorless.required("Senha é obrigatória"),
@@ -192,7 +189,7 @@ class Login extends StatelessWidget {
         ),
       );
       }
-    );
-  }
+    
+  
 
 }

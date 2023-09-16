@@ -1,23 +1,15 @@
 import 'dart:io';
-
+import 'package:explore/models/lugar.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ControllerRegister extends GetxController{
-  File? imagemArmazenada;
+  
 
-  ImagePicker imagePicker = ImagePicker();
+  
 
-  void tirarFoto() async{
-    XFile? image = await imagePicker.pickImage(
-      source: ImageSource.camera,
-      maxWidth: 600,
-    );
-    if(image == null) return;
-
-    imagemArmazenada = File(image.path);
-    update();
-  }
+  
   // var imageFile;
 
   // void onClickCameraImagem() async {
@@ -37,5 +29,12 @@ class ControllerRegister extends GetxController{
   //   imageFile = File(f!.path);
   //   update();
     
+  // }
+
+  // void addLugar(){
+  //   Place newPlace = Place(name: controllerName.text, description: controllerDesc.text);
+    
+
+
   // }
 }

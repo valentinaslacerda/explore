@@ -21,13 +21,13 @@ class CardLugar extends StatelessWidget {
             Container(
               height: 171,
               width: 162,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+              decoration:  BoxDecoration(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
                 image: DecorationImage(
-                  image: AssetImage('assets/images/fundo.jpg'),
+                  image: FileImage(place.image!),
                   fit: BoxFit.cover,
                 ),
               ),

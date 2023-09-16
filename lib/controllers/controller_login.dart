@@ -25,7 +25,7 @@ class ControllerLogin extends GetxController{
     onInit(){
       super.onInit();
       
-    };
+    }
     update();
   }
 
