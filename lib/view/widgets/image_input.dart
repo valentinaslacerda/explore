@@ -16,7 +16,6 @@ class ImageInput extends StatefulWidget {
 }
 
 class _ImageInputState extends State<ImageInput> {
-
   File? img;
 
   tirarFoto() async {
@@ -35,7 +34,7 @@ class _ImageInputState extends State<ImageInput> {
     final savedImg = await img!.copy('${appDir.path}/${fileName}');
     widget.onSelectImage(savedImg);
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -47,13 +46,17 @@ class _ImageInputState extends State<ImageInput> {
             border: Border.all(width: 1, color: green),
           ),
           alignment: Alignment.center,
-          child: img != null ? Image.file(
-            img!,
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ): const Text('Nenhuma Imagem!'),
+          child: img != null
+              ? Image.file(
+                  img!,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                )
+              : const Text('Nenhuma Imagem!'),
         ),
-        const SizedBox(width: 10,),
+        const SizedBox(
+          width: 8,
+        ),
         Expanded(
           child: IconButton(
             onPressed: () {
@@ -61,12 +64,19 @@ class _ImageInputState extends State<ImageInput> {
             },
             icon: const Row(
               children: [
-                Icon(Icons.camera_alt_rounded, color: gray,),
-                SizedBox(width: 6,),
-                Text('Tirar Foto', style: TextStyle(color: green),)
+                Icon(
+                  Icons.camera_alt_rounded,
+                  color: gray,
+                ),
+                SizedBox(
+                  width: 6,
+                ),
+                Text(
+                  'Tirar Foto',
+                  style: TextStyle(color: green),
+                )
               ],
             ),
-            
           ),
         )
       ],

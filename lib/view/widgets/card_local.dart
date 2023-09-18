@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CardLugar extends StatelessWidget {
   CardLugar({super.key, required this.place});
-  
+
   final Place place;
   @override
   Widget build(BuildContext context) {
@@ -14,14 +14,14 @@ class CardLugar extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           color: const Color(0xffFFFFFF),
         ),
-        height: 214,
+        height: 216,
         width: 162,
         child: Column(
           children: [
             Container(
-              height: 171,
+              height: 168,
               width: 162,
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
