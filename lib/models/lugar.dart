@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class Localization {
-  Double? latitude;
-  Double? longitude;
+  double? latitude;
+  double? longitude;
   String? address;
 
   Localization(
@@ -19,6 +19,7 @@ class Place {
   String? description;
   File? image;
   Localization? locale;
+  String? map;
   // Float? rating;
 
   Place(
@@ -27,7 +28,7 @@ class Place {
         @required this.name,
         @required this.description,
         @required this.locale,
-        @required this.image,
+        @required this.image, required String map,
         // @required this.rating
       });
 

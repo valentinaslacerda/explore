@@ -17,7 +17,8 @@ class MyPlaces with ChangeNotifier{
         name: item['name'],
         description: item['description'],
         image: File(item['image']),
-        locale: null
+        locale: null,
+        map: item['map']
       )
     ).toList();
     notifyListeners();
@@ -35,13 +36,14 @@ class MyPlaces with ChangeNotifier{
     return items[index];
   }
 
-  void addPlace(String name, String description, File image){
+  void addPlace(String name, String description, File image, String map){
     final newPlace = Place(
       id: Random().nextDouble().toString(),
       name: name,
       image: image,
       description: description,
-      locale: null
+      locale: null,
+      map: map
     );
 
     items.add(newPlace);
@@ -49,7 +51,8 @@ class MyPlaces with ChangeNotifier{
       'id': newPlace.id,
       'name': newPlace.name,
       'description': newPlace.description,
-      'image': newPlace.image!.path
+      'image': newPlace.image!.path,
+      'map': newPlace.map
     });
     notifyListeners();
     

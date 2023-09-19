@@ -1,8 +1,8 @@
 import 'package:explore/providers/my_places.dart';
+import 'package:explore/view/colors.dart';
 import 'package:explore/view/widgets/card_local.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../models/lugar.dart';
 
 class Home extends StatefulWidget {
   Home({super.key});
@@ -16,6 +16,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
       return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/register');
+          },
+          child: const Icon(Icons.add),
+          backgroundColor: gray,
+        ),
 
         backgroundColor: const Color(0xffF7F7F7),
         body: Column(

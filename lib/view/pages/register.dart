@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:explore/providers/my_places.dart';
 import 'package:explore/view/colors.dart';
 import 'package:explore/view/widgets/image_input.dart';
+import 'package:explore/view/widgets/location_input.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -22,9 +22,12 @@ class _RegisterState extends State<Register> {
   final TextEditingController controllerName = TextEditingController();
   final TextEditingController controllerDesc = TextEditingController();
   File? pickedImage;
+  String? imageMap;
 
 
-  
+  // void selectPos(String){
+  //   imageMap = 
+  // }
   void selectImage(File image){
     pickedImage = image;
   }
@@ -33,7 +36,7 @@ class _RegisterState extends State<Register> {
       return;
     }
     Provider.of<MyPlaces>(context, listen: false).addPlace(
-      controllerName.text, controllerDesc.text, pickedImage!
+      controllerName.text, controllerDesc.text, pickedImage!, 
     );
     Navigator.pushNamed(context, '/home');
   }
@@ -43,8 +46,14 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
         return Scaffold(
+          appBar: AppBar(
+            title: const Text('Cadastrar Local'),
+            centerTitle: true,
+            backgroundColor: gray,
+          ),
         backgroundColor: const Color(0xffe4e4e4),
         body: SafeArea(
+
           child: Form(
             autovalidateMode: AutovalidateMode.disabled,
             child: SingleChildScrollView(
@@ -52,7 +61,7 @@ class _RegisterState extends State<Register> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 50),
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -99,10 +108,13 @@ class _RegisterState extends State<Register> {
                         textAlignVertical: TextAlignVertical.top,
                         cursorColor: green,
                         maxLines: 5,
+                        
                         decoration: const InputDecoration(
+                          hintText: "Digite a descrição do local",
                           prefixIconColor: green,
                           border: OutlineInputBorder(
                             borderSide: BorderSide(),
+                            
                             
                           ),
                           
@@ -112,6 +124,8 @@ class _RegisterState extends State<Register> {
                       ),
                       const SizedBox(height: 30),
                       ImageInput(onSelectImage: selectImage,),
+                      SizedBox(height: 30,),
+                      LocationInput(),
                       // Row(
                       //   mainAxisAlignment: MainAxisAlignment.center,
                       //   mainAxisSize: MainAxisSize.min,
@@ -160,7 +174,7 @@ class _RegisterState extends State<Register> {
 
                         },
                         style: TextButton.styleFrom(
-                          backgroundColor: green,
+                          backgroundColor: gray,
                           minimumSize: const Size(double.infinity, 50)
                         ),
                         child: const Text(

@@ -1,7 +1,6 @@
 import 'package:explore/view/colors.dart';
 import 'package:explore/view/pages/view_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
