@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter/material.dart';
 
@@ -19,7 +18,7 @@ class Place {
   String? description;
   File? image;
   Localization? locale;
-  String? map;
+  //String? map;
   // Float? rating;
 
   Place(
@@ -28,13 +27,14 @@ class Place {
         @required this.name,
         @required this.description,
         @required this.locale,
-        @required this.image, required String map,
+        @required this.image,
         // @required this.rating
       });
 
   Place.fromJson(Map<String, dynamic> json)
   : name = json['name'],
   description = json['description'];
+
 
 
   Map<String, dynamic> toJson(){

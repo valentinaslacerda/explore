@@ -50,16 +50,16 @@ class ViewPlace extends StatelessWidget {
             ),
           ),
 
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: Row(
               children: [
-                Icon(Icons.place_sharp, color: green, size: 28, ),
-                SizedBox(width: 8,),
+                const Icon(Icons.place_sharp, color: green, size: 28, ),
+                const SizedBox(width: 8,),
                 Text(
-                  'Nome - Pais',
-                  style: TextStyle(
-                    fontSize: 18,
+                  '${place!.locale!.address}',
+                  style: const TextStyle(
+                    fontSize: 13,
                     color: green
                   ),
                 )

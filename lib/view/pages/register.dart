@@ -5,6 +5,7 @@ import 'package:explore/view/colors.dart';
 import 'package:explore/view/widgets/image_input.dart';
 import 'package:explore/view/widgets/location_input.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -22,21 +23,31 @@ class _RegisterState extends State<Register> {
   final TextEditingController controllerName = TextEditingController();
   final TextEditingController controllerDesc = TextEditingController();
   File? pickedImage;
-  String? imageMap;
+  LatLng? pickedPosition;
 
 
-  // void selectPos(String){
-  //   imageMap = 
-  // }
   void selectImage(File image){
-    pickedImage = image;
+    setState(() {
+      pickedImage = image;
+      
+    });
+  }
+
+  bool isValidForm(){
+    return controllerName.text.isNotEmpty && pickedImage != null && pickedPosition != null;
+  }
+
+  void selectPosition(LatLng position){
+    setState(() {
+      pickedPosition = position;
+      
+    });
   }
   void addLugar(){
-    if(controllerName.text.isEmpty || pickedImage == null){
-      return;
-    }
+    if(!isValidForm()) return;
+    
     Provider.of<MyPlaces>(context, listen: false).addPlace(
-      controllerName.text, controllerDesc.text, pickedImage!, 
+      controllerName.text, controllerDesc.text, pickedImage!, pickedPosition!
     );
     Navigator.pushNamed(context, '/home');
   }
@@ -122,10 +133,14 @@ class _RegisterState extends State<Register> {
                         controller: controllerDesc,
                         validator: Validatorless.required("A descrição é obrigatória"),
                       ),
+
                       const SizedBox(height: 30),
+
                       ImageInput(onSelectImage: selectImage,),
-                      SizedBox(height: 30,),
-                      LocationInput(),
+
+                      const SizedBox(height: 30,),
+                      
+                      LocationInput(onselectPosition: selectPosition,),
                       // Row(
                       //   mainAxisAlignment: MainAxisAlignment.center,
                       //   mainAxisSize: MainAxisSize.min,
@@ -167,12 +182,14 @@ class _RegisterState extends State<Register> {
                       // ),
                       const SizedBox(height: 40),
                       TextButton(
-                        onPressed: () {
+                        onPressed: isValidForm() ? () {
+
+
                           addLugar();
                           controllerDesc.text = '';
                           controllerName.text = '';
 
-                        },
+                        } : null,
                         style: TextButton.styleFrom(
                           backgroundColor: gray,
                           minimumSize: const Size(double.infinity, 50)

@@ -4,10 +4,12 @@ import 'package:explore/view/pages/view_map.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 class LocationInput extends StatefulWidget {
-  const LocationInput({super.key});
+  const LocationInput({super.key, required this.onselectPosition});
+  final Function onselectPosition;
 
   @override
   State<LocationInput> createState() => _LocationInputState();
@@ -15,6 +17,17 @@ class LocationInput extends StatefulWidget {
 
 class _LocationInputState extends State<LocationInput> {
   String? previewUrl;
+
+  void showMap(double lat, double lng){
+    final staticMapImage = Locations.generateLocationPreview(
+      latitude: lat,
+      longitude: lng,
+    );
+
+    setState(() {
+      previewUrl = staticMapImage;
+    });
+  }
 
   Future<Position> getUserCurrentLocation() async {
     await Geolocator.requestPermission()
@@ -32,25 +45,23 @@ class _LocationInputState extends State<LocationInput> {
     print(locData.latitude);
     print(locData.longitude);
 
-    final staticMapImage = Locations.generateLocationPreview(
-      latitude: locData.latitude,
-      longitude: locData.longitude,
-    );
-
-    setState(() {
-      previewUrl = staticMapImage;
-    });
+    showMap(locData.latitude!, locData.longitude!);
+    widget.onselectPosition(LatLng(locData.latitude!, locData.longitude!));
+    
   }
 
   Future<void> selectOnMap() async {
-    final selectedLocation = await Navigator.of(context).push(MaterialPageRoute(
+    final LatLng selectedPosition = await Navigator.of(context).push(MaterialPageRoute(
       fullscreenDialog: true,
       builder: (context) => ViewMap(),
     ));
 
-    if (selectedLocation == null) {
+    if (selectedPosition == null) {
       return;
-    }
+    }    
+
+    showMap(selectedPosition.latitude, selectedPosition.longitude);
+    widget.onselectPosition(selectedPosition);
   }
 
   @override
@@ -80,29 +91,30 @@ class _LocationInputState extends State<LocationInput> {
           children: [
             IconButton(
               onPressed: () {
-                final locData = Location().getLocation();
-                var staticMapImage;
-                getUserCurrentLocation().then((value) async {
-                  staticMapImage = Locations.generateLocationPreview(
-                      latitude: value.latitude, longitude: value.longitude);
-                  setState(() {
-                    previewUrl = staticMapImage;
-                  });
-                  print(value.latitude.toString() +
-                      " " +
-                      value.longitude.toString());
-                });
+                // final locData = Location().getLocation();
+                // var staticMapImage;
+                // getUserCurrentLocation().then((value) async {
+                //   staticMapImage = Locations.generateLocationPreview(
+                //       latitude: value.latitude, longitude: value.longitude);
+                //   setState(() {
+                //     previewUrl = staticMapImage;
+                //   });
+                //   print(value.latitude.toString() +
+                //       " " +
+                //       value.longitude.toString());
+                // });
+                getCurrentLocation();
               },
-              icon: Icon(Icons.place_outlined),
+              icon: const Icon(Icons.place_outlined),
             ),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             IconButton(
               onPressed: () {
                 selectOnMap();
               },
-              icon: Icon(Icons.map),
+              icon: const Icon(Icons.map),
             )
           ],
         )

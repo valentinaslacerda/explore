@@ -4,7 +4,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ViewMap extends StatefulWidget {
-  ViewMap({super.key });
+  
+  
+  ViewMap({super.key});
 
   @override
   State<ViewMap> createState() => _ViewMapState();
@@ -12,16 +14,22 @@ class ViewMap extends StatefulWidget {
 
 
 class _ViewMapState extends State<ViewMap> {
-
+  bool? isReadonly = false;
   Localization? initialLocation = Localization(
-    latitude: -23.562436,
-    longitude: -46.655005,
-    address: 'São Paulo'
-  );
+      latitude: 37.419857, longitude: -122.078827, address: 'nenhum');
+
+  LatLng? pickedPosition;
+
+  void selectPosition(LatLng position){
+    setState(() {
+      pickedPosition = position;
+    });
+  }
+  
+  
 
   Future<Position?> posicaoAtual() async{
-    //LocalPermission permission;
-
+    
     bool ativado = await Geolocator.isLocationServiceEnabled();
     if(ativado){
       Position position = await Geolocator.getCurrentPosition(
@@ -41,6 +49,18 @@ class _ViewMapState extends State<ViewMap> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Selecione no mapa'),
+        centerTitle: true,
+        actions: [
+          if(!isReadonly!)
+          IconButton(
+            icon: const Icon(Icons.check),
+            onPressed: pickedPosition == null ? null : () {
+              Navigator.of(context).pop(pickedPosition);
+            
+            },
+
+          )
+        ],
       ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
@@ -48,8 +68,18 @@ class _ViewMapState extends State<ViewMap> {
             initialLocation!.latitude!,
             initialLocation!.longitude!
           ),
-          zoom: 14
+          zoom: 14,
+          
         ),
+        onTap: isReadonly! ? null : selectPosition,
+        markers: pickedPosition == null
+          ? <Marker>{}
+          : {
+              Marker(
+                markerId: MarkerId('p1'),
+                position: pickedPosition!,
+            )
+        },
       ),
     );
   }
