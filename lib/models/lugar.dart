@@ -22,25 +22,21 @@ class Place {
   String? map;
   // Float? rating;
 
-  Place(
-      {
-        @required this.id,
-        @required this.name,
-        @required this.description,
-        @required this.locale,
-        @required this.image, required String map,
-        // @required this.rating
-      });
+  Place({
+    @required this.id,
+    @required this.name,
+    @required this.description,
+    @required this.locale,
+    required File image,
+
+    // @required this.rating
+  });
 
   Place.fromJson(Map<String, dynamic> json)
-  : name = json['name'],
-  description = json['description'];
+      : name = json['name'],
+        description = json['description'];
 
-
-  Map<String, dynamic> toJson(){
-    return{
-      'name': name,
-      'description': description
-    };
+  Map<String, dynamic> toJson() {
+    return {'name': name, 'description': description};
   }
 }

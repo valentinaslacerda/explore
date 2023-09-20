@@ -28,10 +28,10 @@ class CardLugar extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                image: DecorationImage(
-                  image: FileImage(place.image!),
-                  fit: BoxFit.cover,
-                ),
+                //image: DecorationImage(
+                //image: FileImage(place.image!),
+                //fit: BoxFit.cover,
+                //),
               ),
             ),
             const SizedBox(height: 7),

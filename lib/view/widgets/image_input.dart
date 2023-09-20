@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:explore/view/colors.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
@@ -13,10 +14,34 @@ class ImageInput extends StatefulWidget {
 
   @override
   State<ImageInput> createState() => _ImageInputState();
+
+  downloadImage(String imageUrl) {}
 }
 
 class _ImageInputState extends State<ImageInput> {
   File? img;
+  final FirebaseStorage storage = FirebaseStorage.instance;
+  Future<void> upload(String path) async {
+    File file = new File(path);
+    try {
+      String ref = 'images/img-${DateTime.now().toString()}.jpg';
+      await storage.ref(ref).putFile(file);
+    } on FirebaseException catch (e) {
+      throw Exception('Erro no upload: ${e.code}');
+    }
+  }
+
+  Future<void> downloadImage(String imageUrl) async {
+    try {
+      final Reference ref = FirebaseStorage.instance.ref(imageUrl);
+      final File localFile = File(
+          '${(await syspath.getApplicationDocumentsDirectory()).path}/imagem.jpg');
+
+      await ref.writeToFile(localFile);
+    } on FirebaseException catch (e) {
+      print('Erro no download: ${e.code}');
+    }
+  }
 
   tirarFoto() async {
     final ImagePicker picker = ImagePicker();
@@ -33,6 +58,9 @@ class _ImageInputState extends State<ImageInput> {
     String fileName = path.basename(img!.path);
     final savedImg = await img!.copy('${appDir.path}/${fileName}');
     widget.onSelectImage(savedImg);
+    if (savedImg != null) {
+      await upload(savedImg.path);
+    }
   }
 
   @override

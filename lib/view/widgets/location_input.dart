@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class LocationInput extends StatefulWidget {
   const LocationInput({super.key});
@@ -15,6 +17,21 @@ class LocationInput extends StatefulWidget {
 
 class _LocationInputState extends State<LocationInput> {
   String? previewUrl;
+
+  Future<String> getAddress(double latitude, double longitude) async {
+    final url = Uri.parse(
+        'https://nominatim.openstreetmap.org/reverse?format=json&lat=$latitude&lon=$longitude');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final address = data['display_name'];
+      return address;
+    } else {
+      throw Exception('Falha ao obter o endereço');
+    }
+  }
 
   Future<Position> getUserCurrentLocation() async {
     await Geolocator.requestPermission()
@@ -79,7 +96,7 @@ class _LocationInputState extends State<LocationInput> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              onPressed: () {
+              onPressed: () async {
                 final locData = Location().getLocation();
                 var staticMapImage;
                 getUserCurrentLocation().then((value) async {
@@ -91,6 +108,16 @@ class _LocationInputState extends State<LocationInput> {
                   print(value.latitude.toString() +
                       " " +
                       value.longitude.toString());
+
+                  final latitude = value.latitude;
+                  final longitude = value.longitude;
+
+                  try {
+                    final address = await getAddress(latitude, longitude);
+                    print('Endereço: $address');
+                  } catch (e) {
+                    print('Erro ao obter o endereço: $e');
+                  }
                 });
               },
               icon: Icon(Icons.place_outlined),

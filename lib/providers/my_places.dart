@@ -6,44 +6,41 @@ import 'package:flutter/material.dart';
 
 import '../models/lugar.dart';
 
-class MyPlaces with ChangeNotifier{
+class MyPlaces with ChangeNotifier {
   List<Place> items = [];
-  
-  Future<void> loadPlaces() async{
+
+  Future<void> loadPlaces() async {
     final dbList = await DbUtil.getData('places');
-    items = dbList.map(
-      (item) => Place(
-        id: item['id'],
-        name: item['name'],
-        description: item['description'],
-        image: File(item['image']),
-        locale: null,
-        map: item['map']
-      )
-    ).toList();
+    items = dbList
+        .map((item) => Place(
+            id: item['id'],
+            name: item['name'],
+            description: item['description'],
+            image: File(item['image']),
+            locale: null))
+        .toList();
     notifyListeners();
   }
-  List<Place> get itens{
-    return [...items];
 
+  List<Place> get itens {
+    return [...items];
   }
 
-  int get itemsCount{
+  int get itemsCount {
     return items.length;
   }
 
-  Place itemByIndex(int index){
+  Place itemByIndex(int index) {
     return items[index];
   }
 
-  void addPlace(String name, String description, File image, String map){
+  void addPlace(String name, String description, File image) {
     final newPlace = Place(
       id: Random().nextDouble().toString(),
       name: name,
       image: image,
       description: description,
       locale: null,
-      map: map
     );
 
     items.add(newPlace);
@@ -52,9 +49,7 @@ class MyPlaces with ChangeNotifier{
       'name': newPlace.name,
       'description': newPlace.description,
       'image': newPlace.image!.path,
-      'map': newPlace.map
     });
     notifyListeners();
-    
   }
 }
