@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../../models/lugar.dart';
 
 class ViewPlace extends StatelessWidget {
-  ViewPlace({super.key, required this.place});
+  const ViewPlace({super.key, required this.place});
 
-  Place? place;
+  final Place? place;
 
   @override
   Widget build(BuildContext context) {
@@ -39,33 +39,39 @@ class ViewPlace extends StatelessWidget {
                 ),
               ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: Text(
-              place!.description!,
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.grey
-              ),
-            ),
-          ),
+
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            child: Row(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
               children: [
-                const Icon(Icons.place_sharp, color: green, size: 28, ),
-                const SizedBox(width: 8,),
+                Text(
+                  place!.description!,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey
+                  ),
+                ),
+                const SizedBox(height: 26),
+
+                const Row(
+                  children: [
+                    Icon(Icons.location_pin),
+                    SizedBox(width: 8,),
+                    Text('Endereço: ', style: TextStyle(fontWeight: FontWeight.bold , fontSize: 18),),
+                  ],
+                ),
+                const SizedBox(height: 8,),
                 Text(
                   '${place!.locale!.address}',
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: green
-                  ),
+                  textAlign: TextAlign.start,
+                  style: const TextStyle(fontSize: 19, color: green),
                 )
               ],
             ),
-          )
+          ),
+
+          
         ],
       ),
     );

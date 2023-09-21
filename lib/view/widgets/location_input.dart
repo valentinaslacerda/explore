@@ -1,9 +1,7 @@
 import 'package:explore/database/locations.dart';
 import 'package:explore/view/colors.dart';
 import 'package:explore/view/pages/view_map.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
@@ -29,17 +27,6 @@ class _LocationInputState extends State<LocationInput> {
     });
   }
 
-  Future<Position> getUserCurrentLocation() async {
-    await Geolocator.requestPermission()
-        .then((value) {})
-        .onError((error, stackTrace) async {
-      await Geolocator.requestPermission();
-      print("ERROR" + error.toString());
-    });
-    //print(Geolocator.getCurrentPosition());
-    return await Geolocator.getCurrentPosition();
-  }
-
   Future<void> getCurrentLocation() async {
     final locData = await Location().getLocation();
     print(locData.latitude);
@@ -56,9 +43,9 @@ class _LocationInputState extends State<LocationInput> {
       builder: (context) => ViewMap(),
     ));
 
-    if (selectedPosition == null) {
-      return;
-    }    
+    // if (selectedPosition == null) {
+    //   return;
+    // }    
 
     showMap(selectedPosition.latitude, selectedPosition.longitude);
     widget.onselectPosition(selectedPosition);
@@ -89,33 +76,17 @@ class _LocationInputState extends State<LocationInput> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
-              onPressed: () {
-                // final locData = Location().getLocation();
-                // var staticMapImage;
-                // getUserCurrentLocation().then((value) async {
-                //   staticMapImage = Locations.generateLocationPreview(
-                //       latitude: value.latitude, longitude: value.longitude);
-                //   setState(() {
-                //     previewUrl = staticMapImage;
-                //   });
-                //   print(value.latitude.toString() +
-                //       " " +
-                //       value.longitude.toString());
-                // });
-                getCurrentLocation();
-              },
-              icon: const Icon(Icons.place_outlined),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
+            
             IconButton(
               onPressed: () {
                 selectOnMap();
               },
-              icon: const Icon(Icons.map),
-            )
+              icon: const Icon(Icons.map, color: green,),
+            ),
+            // const SizedBox(
+            //   width: 4,
+            // ),
+            const Text('Selecione no mapa', style: TextStyle(color: green)),
           ],
         )
       ],

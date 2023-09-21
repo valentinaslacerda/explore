@@ -3,7 +3,6 @@ import 'package:explore/view/pages/access.dart';
 import 'package:explore/view/pages/home.dart';
 import 'package:explore/view/pages/login.dart';
 import 'package:explore/view/pages/register.dart';
-import 'package:explore/view/pages/view_home.dart';
 import 'package:explore/view/pages/view_place.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +42,9 @@ class MyApp extends StatelessWidget {
             },);
             
           }
+          return null;
         },
-        initialRoute: '/home',
+        initialRoute: '/login',
         theme: ThemeData(
           fontFamily: 'Roboto',
         ),

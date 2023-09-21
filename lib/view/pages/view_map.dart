@@ -16,7 +16,7 @@ class ViewMap extends StatefulWidget {
 class _ViewMapState extends State<ViewMap> {
   bool? isReadonly = false;
   Localization? initialLocation = Localization(
-      latitude: 37.419857, longitude: -122.078827, address: 'nenhum');
+      latitude: -5.2067022, longitude: -37.3237845, address: 'nenhum');
 
   LatLng? pickedPosition;
 
@@ -40,6 +40,7 @@ class _ViewMapState extends State<ViewMap> {
     else{
       Future.error('erro');
     }
+    return null;
   }
 
   

@@ -141,45 +141,7 @@ class _RegisterState extends State<Register> {
                       const SizedBox(height: 30,),
                       
                       LocationInput(onselectPosition: selectPosition,),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   mainAxisSize: MainAxisSize.min,
-                      //   children: [
-                      //     Container(
-                      //       width: 57.0,
-                      //       height: 57.0,
-                      //       decoration: BoxDecoration(
-                      //         borderRadius: BorderRadius.circular(5),
-                      //         color: green,
-                      //       ),
-                      //       child: IconButton(
-                      //         onPressed: () {},
-                      //         icon: const Icon(
-                      //           Icons.pin_drop,
-                      //           color: Color(0xffffffff),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     const SizedBox(width: 40),
-                      //     Container(
-                      //       width: 57.0,
-                      //       height: 57.0,
-                      //       decoration: BoxDecoration(
-                      //         borderRadius: BorderRadius.circular(5),
-                      //         color: green,
-                      //       ),
-                      //       child: IconButton(
-                      //         onPressed: () {
-                      //           //r.tirarFoto();
-                      //         },
-                      //         icon: const Icon(
-                      //           Icons.camera_alt,
-                      //           color: Color(0xffffffff),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
+                      
                       const SizedBox(height: 40),
                       TextButton(
                         onPressed: isValidForm() ? () {
@@ -191,7 +153,7 @@ class _RegisterState extends State<Register> {
 
                         } : null,
                         style: TextButton.styleFrom(
-                          backgroundColor: gray,
+                          backgroundColor: green,
                           minimumSize: const Size(double.infinity, 50)
                         ),
                         child: const Text(

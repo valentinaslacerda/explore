@@ -1,5 +1,5 @@
 import 'package:explore/view/colors.dart';
-import 'package:explore/view/pages/view_home.dart';
+import 'package:explore/view/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
@@ -94,7 +94,8 @@ class Login extends StatelessWidget {
                                   color: Colors.black,
                                   fontWeight: FontWeight.w800),
                             ),
-                          )),
+                          )
+                      ),
                       const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +116,7 @@ class Login extends StatelessWidget {
                           )
                         ],
                       ),
-                      //SizedBox(height: 10),
+                     
                       TextButton(
                         onPressed: () {
                           FirebaseAuth.instance
@@ -126,13 +127,14 @@ class Login extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ViewHome()));
+                                    builder: (context) => Home()));
                           });
                         },
                         style: TextButton.styleFrom(
                             //padding: EdgeInsets.symmetric(horizontal: 80),
-                            backgroundColor: green,
-                            minimumSize: const Size(double.infinity, 40)),
+                          backgroundColor: green,
+                          minimumSize: const Size(double.infinity, 40)
+                        ),
                         child: const Text(
                           'Continuar',
                           style: TextStyle(
@@ -141,34 +143,7 @@ class Login extends StatelessWidget {
                         ),
                       ),
 
-                      const SizedBox(height: 10),
-
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            elevation: 0,
-                            side: const BorderSide(color: Colors.grey),
-                            maximumSize: const Size(200, 40),
-                          ),
-                          onPressed: () {
-                            //LOGIN COM O GOOGLE
-                            //FAZER SO COM O FIREBASE
-                          },
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.g_mobiledata_rounded,
-                                color: Colors.blue,
-                              ), //MUDAR
-                              SizedBox(width: 8),
-                              Text(
-                                'Login com o Google',
-                                style: TextStyle(
-                                    color: Colors.black54, fontSize: 12),
-                              )
-                            ],
-                          ))
+                      
                     ],
                   ),
                 )

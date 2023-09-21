@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
                   "Explore & Compartilhe",
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 42,
+                      fontSize: 44,
                       fontWeight: FontWeight.bold),
                 ),
               ),

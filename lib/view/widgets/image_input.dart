@@ -66,7 +66,7 @@ class _ImageInputState extends State<ImageInput> {
               children: [
                 Icon(
                   Icons.camera_alt_rounded,
-                  color: gray,
+                  color: green,
                 ),
                 SizedBox(
                   width: 6,
