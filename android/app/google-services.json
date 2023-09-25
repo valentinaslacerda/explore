@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "819841296379",
+    "project_id": "explore-e60c5",
+    "storage_bucket": "explore-e60c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819841296379:android:7a9a1b31f7ee63ac1a0d5e",
+        "android_client_info": {
+          "package_name": "com.example.explore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5MsaqwukuOhhVZnc4Sr-0xIqiBf0Dve4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
